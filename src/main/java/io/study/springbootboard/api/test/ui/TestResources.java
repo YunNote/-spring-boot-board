@@ -14,6 +14,12 @@ public class TestResources {
 
    private final TestUsecase testUsecase;
 
+
+   @GetMapping("/all")
+   public void findAllTest() {
+      testUsecase.findAll();
+   }
+
    @GetMapping
    public String test() {
       testUsecase.saveTest();
