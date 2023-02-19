@@ -1,4 +1,4 @@
-package io.study.springbootboard.web.base;
+package io.study.springbootboard.web.base.response;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

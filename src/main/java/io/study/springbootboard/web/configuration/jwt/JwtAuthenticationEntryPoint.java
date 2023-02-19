@@ -1,7 +1,7 @@
 package io.study.springbootboard.web.configuration.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.study.springbootboard.web.base.BaseResponse;
+import io.study.springbootboard.web.base.response.BaseResponse;
 import io.study.springbootboard.web.exception.ApiStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.security.core.AuthenticationException;
