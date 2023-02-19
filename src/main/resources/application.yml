@@ -10,6 +10,8 @@ management:
       exposure:
         include: health
 
+jwt:
+  secret: c3ByaW5nLWJvb3QtYm9hcmQtYXBwbGljYXRpb24tc2FtcGxlCg==
 
 spring:
   datasource:

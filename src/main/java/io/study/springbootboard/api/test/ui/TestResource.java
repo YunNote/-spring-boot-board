@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/test")
-public class TestResources {
+public class TestResource {
 
    private final TestUsecase testUsecase;
 

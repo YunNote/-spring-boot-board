@@ -7,3 +7,8 @@
 > docker pull --platform linux/amd64 mysql:8.0.28 
 > 
 > docker run --platform linux/amd64 --name mysql -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=1234 mysql:8.0.28
+
+
+### 🔥 jwt secret
+
+> echo 'spring-boot-board-application-sample ' | base64
