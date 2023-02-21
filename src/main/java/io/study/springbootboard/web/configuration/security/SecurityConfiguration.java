@@ -1,5 +1,6 @@
 package io.study.springbootboard.web.configuration.security;
 
+import io.study.springbootboard.web.configuration.header.HeadersFilter;
 import io.study.springbootboard.web.configuration.jwt.JwtAccessDeniedHandler;
 import io.study.springbootboard.web.configuration.jwt.JwtAuthenticationEntryPoint;
 import io.study.springbootboard.web.configuration.jwt.JwtProvider;
@@ -8,18 +9,17 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Slf4j
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration{
 
    private final JwtProvider jwtProvider;
    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -41,21 +41,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
               .and()
               .authorizeHttpRequests()
               .antMatchers("/test").permitAll()
+              .antMatchers("/api/users/**").permitAll()
               .anyRequest().authenticated()
               .and()
               .formLogin().disable()
+              .addFilterBefore(new HeadersFilter(), UsernamePasswordAuthenticationFilter.class)
               .apply(new JwtSecurityConfig(jwtProvider));
       return http.build();
    }
 
-   @Override
-   public void configure(WebSecurity web){
 
-      web.ignoring()
-              .antMatchers(
-                      "/favicon.ico"
-              );
-   }
 
    @Bean
    public PasswordEncoder bCryptPasswordEncoder() {
