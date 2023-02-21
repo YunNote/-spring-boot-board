@@ -13,12 +13,12 @@ import java.util.List;
 @Repository
 public class TestQueryRepositoryImpl implements TestQueryRepository {
 
-   private final JPAQueryFactory jpaQueryFactory;
+   private final JPAQueryFactory queryFactory;
 
    @Override
    public List<TestEntity> findAll() {
       QTestEntity qTestEntity = QTestEntity.testEntity;
-      return jpaQueryFactory.selectFrom(qTestEntity)
+      return queryFactory.selectFrom(qTestEntity)
               .fetch();
    }
 }
