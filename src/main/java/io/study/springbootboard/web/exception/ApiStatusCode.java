@@ -2,6 +2,8 @@ package io.study.springbootboard.web.exception;
 
 public enum ApiStatusCode {
 
+   X_API_VERSION_NOT_FOUND(404, "x-api-version Not Found"),
+
    // JWT Prefix 1xxx
    JWT_UNKNOWN_ERROR(1400, "Unknown Jwt Error"),
    INVALID_JWT_SIGNATURE(1401, "Invalid JWT Signature "),
