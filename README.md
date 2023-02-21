@@ -1,4 +1,6 @@
 
+### 🔥 QFile 생성 
+Gradle -> other -> compileQuerydsl실행 
 
 ### 🔥 Code Indent는 3으로 설정.
 
@@ -12,3 +14,4 @@
 ### 🔥 jwt secret
 
 > echo 'spring-boot-board-application-sample ' | base64
+
