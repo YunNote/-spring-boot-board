@@ -2,6 +2,7 @@ package io.study.springbootboard.web.exception;
 
 public enum ApiStatusCode {
 
+   BAD_REQUEST(400, "Bad Request"),
    X_API_VERSION_NOT_FOUND(404, "x-api-version Not Found"),
 
    // JWT Prefix 1xxx
