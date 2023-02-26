@@ -2,6 +2,8 @@ package io.study.springbootboard.web.exception;
 
 public enum ApiStatusCode {
 
+   CREATED(201, "Created Success"),
+
    BAD_REQUEST(400, "Bad Request"),
    X_API_VERSION_NOT_FOUND(404, "x-api-version Not Found"),
 

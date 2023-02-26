@@ -1,4 +1,4 @@
-package io.study.springbootboard.api.user.application.request;
+package io.study.springbootboard.api.user.ui.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
