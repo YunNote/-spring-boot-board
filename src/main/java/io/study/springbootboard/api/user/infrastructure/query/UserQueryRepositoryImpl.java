@@ -1,9 +1,11 @@
 package io.study.springbootboard.api.user.infrastructure.query;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import io.study.springbootboard.api.user.domain.entity.User;
 import io.study.springbootboard.api.user.domain.repository.UserQueryRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -21,8 +23,18 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
 
       return Optional.ofNullable(
               queryFactory.selectFrom(user)
-                      .where(user.email.eq(email))
+                      .where(
+                              eqEmail(email)
+                      )
                       .fetchOne()
       );
+   }
+
+   private BooleanExpression eqEmail(final String email) {
+      if (Strings.isBlank(email)) {
+         return null;
+      }
+
+      return user.email.eq(email);
    }
 }

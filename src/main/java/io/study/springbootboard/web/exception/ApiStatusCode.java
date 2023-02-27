@@ -13,7 +13,10 @@ public enum ApiStatusCode {
    EXPIRED_JWT_TOKEN(1402, "Expired Jwt Token"),
    UNSUPPORTED_JWT_TOKEN(1403, "Unsupported Jwt Token"),
    INVALID_JWT_TOKEN(1404, "Invalid Jwt Token"),
-   JWT_AUTHORITIES_NOT_FOUND(1405, "Authorities not found Exception")
+   JWT_AUTHORITIES_NOT_FOUND(1405, "Authorities not found Exception"),
+
+   // User Prefix 2xxx
+   USER_LOGIN_NOT_MATCHED(2404, "User Email or Password Not Match")
    ;
 
    private int code;

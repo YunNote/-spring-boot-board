@@ -6,7 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import io.study.springbootboard.web.exception.types.AuthoritiesNotFound;
+import io.study.springbootboard.web.exception.types.AuthoritiesNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -60,7 +60,7 @@ public class JwtProvider {
       Claims claims = parseClaims(accessToken);
 
       if (Objects.isNull(claims.get(AUTHORITIES_KEY))) {
-         throw new AuthoritiesNotFound();
+         throw new AuthoritiesNotFoundException();
       }
 
       List<SimpleGrantedAuthority> authorities = Arrays.stream(claims.get(AUTHORITIES_KEY).toString()
