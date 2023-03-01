@@ -1,11 +1,12 @@
 package io.study.springbootboard.api.user.domain;
 
 
-import io.study.springbootboard.api.user.application.wrapper.UserSigninWrapper;
-import io.study.springbootboard.api.user.application.wrapper.UserSignupWrapper;
+import io.study.springbootboard.api.user.domain.entity.User;
+import io.study.springbootboard.api.user.domain.wrapper.UserSigninWrapper;
+import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
 
 public interface UserDataprovider {
 
-   void loginBasicUser(UserSigninWrapper wrapper);
+   User loginBasicUser(UserSigninWrapper wrapper);
    void registed(UserSignupWrapper wrapper);
 }

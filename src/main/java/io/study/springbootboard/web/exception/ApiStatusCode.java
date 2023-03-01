@@ -2,6 +2,7 @@ package io.study.springbootboard.web.exception;
 
 public enum ApiStatusCode {
 
+   OK(200, "Success Api Call"),
    CREATED(201, "Created Success"),
 
    BAD_REQUEST(400, "Bad Request"),
@@ -16,7 +17,10 @@ public enum ApiStatusCode {
    JWT_AUTHORITIES_NOT_FOUND(1405, "Authorities not found Exception"),
 
    // User Prefix 2xxx
-   USER_LOGIN_NOT_MATCHED(2404, "User Email or Password Not Match")
+
+   USER_UNAUTHORIZED(2401, "User Unauthorized"),
+   USER_LOGIN_NOT_MATCHED(2404, "User Email or Password Not Match"),
+
    ;
 
    private int code;

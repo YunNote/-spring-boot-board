@@ -1,7 +1,9 @@
 package io.study.springbootboard.web.configuration.jwt;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class Jwt {
 
    private String grantType;

@@ -1,6 +1,6 @@
-package io.study.springbootboard.api.user.application.wrapper;
+package io.study.springbootboard.api.user.domain.wrapper;
 
-import io.study.springbootboard.api.user.ui.request.UserSignupRequest;
+import io.study.springbootboard.api.user.application.request.UserSignupRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

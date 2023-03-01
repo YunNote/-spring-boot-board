@@ -1,8 +1,7 @@
-package io.study.springbootboard.api.user.application.wrapper;
+package io.study.springbootboard.api.user.domain.wrapper;
 
-import io.study.springbootboard.api.user.ui.request.UserSigninRequest;
+import io.study.springbootboard.api.user.application.request.UserSigninRequest;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
 public class UserSigninWrapper {

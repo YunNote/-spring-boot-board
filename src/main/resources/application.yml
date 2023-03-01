@@ -11,7 +11,7 @@ management:
         include: health
 
 jwt:
-  secret: c3ByaW5nLWJvb3QtYm9hcmQtYXBwbGljYXRpb24tc2FtcGxlCg==
+  secret: c3ByaW5nLWJvb3QtYm9hcmQtYXBwbGljYXRpb24tc2FtcGxlLTIwMjMwMzAxMTAwNC1qd3QtdG9rZW4taHM1MTIK
 
 spring:
   datasource:
@@ -29,7 +29,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 
 decorator:
   datasource:

@@ -27,7 +27,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
       ApiStatusCode status = (ApiStatusCode) request.getAttribute(ATTRIBUTE);
 
       if (Objects.isNull(status)) {
-         responseBuilder(response, JWT_UNKNOWN_ERROR);
+         responseBuilder(response, USER_LOGIN_NOT_MATCHED);
       }
 
       if (status == INVALID_JWT_SIGNATURE) {
