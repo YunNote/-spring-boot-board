@@ -45,6 +45,7 @@ public class SecurityConfiguration{
               .accessDeniedHandler(jwtAccessDeniedHandler)
               .and()
               .authorizeHttpRequests()
+              .antMatchers("/api/test").permitAll()
               .antMatchers("/api/users/**").permitAll()
               .anyRequest().authenticated()
               .and()

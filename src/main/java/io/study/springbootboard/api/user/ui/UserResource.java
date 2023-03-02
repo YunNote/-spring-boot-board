@@ -10,13 +10,17 @@ import io.study.springbootboard.web.base.BaseResource;
 import io.study.springbootboard.web.base.response.BaseResponse;
 import io.study.springbootboard.web.base.response.DataResponse;
 import io.study.springbootboard.web.configuration.jwt.Jwt;
+import io.study.springbootboard.web.configuration.mail.MailService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.mail.MessagingException;
+
+import java.io.UnsupportedEncodingException;
 
 import static io.study.springbootboard.web.exception.ApiStatusCode.CREATED;
 import static io.study.springbootboard.web.exception.ApiStatusCode.OK;
@@ -28,10 +32,12 @@ public class UserResource extends BaseResource {
    private final UserSignupUsecase userSignupUsecase;
    private final UserSigninUsecase userSigninUsecase;
 
+   private final MailService mailService;
 
-   @Secured({"ROLE_ADMIN"})
    @GetMapping("/test")
-   public String test () {
+   public String test () throws MessagingException, UnsupportedEncodingException {
+
+      mailService.sendMail();
       return "Aaa";
    }
 

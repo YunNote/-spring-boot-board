@@ -14,4 +14,5 @@ public class UserSignupRequest {
 
    @NotBlank(message = "required password")
    private String password;
+   private String nickname;
 }

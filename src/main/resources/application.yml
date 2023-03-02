@@ -30,8 +30,23 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: <<username>>
+    password: <<password>>
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true
+          auth: true
 
 decorator:
   datasource:
     p6spy:
       enable-logging: true
+
+
+
