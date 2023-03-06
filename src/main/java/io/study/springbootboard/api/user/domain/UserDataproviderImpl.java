@@ -1,13 +1,13 @@
 package io.study.springbootboard.api.user.domain;
 
 import io.study.springbootboard.api.user.application.mapper.UserMapper;
-import io.study.springbootboard.api.user.application.validate.UserValidator;
+import io.study.springbootboard.api.user.domain.validate.UserValidator;
 import io.study.springbootboard.api.user.domain.wrapper.UserSigninWrapper;
 import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
 import io.study.springbootboard.api.user.domain.entity.User;
 import io.study.springbootboard.api.user.domain.repository.UserQueryRepository;
 import io.study.springbootboard.api.user.domain.repository.UserRepository;
-import io.study.springbootboard.web.exception.types.UserNotMatchedException;
+import io.study.springbootboard.web.exception.types.user.UserNotMatchedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

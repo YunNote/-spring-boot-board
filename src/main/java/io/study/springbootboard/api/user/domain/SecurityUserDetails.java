@@ -5,8 +5,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 public class SecurityUserDetails implements UserDetails {
 
@@ -19,11 +19,10 @@ public class SecurityUserDetails implements UserDetails {
    @Override
    public Collection<? extends GrantedAuthority> getAuthorities() {
 
-      return Arrays.asList(
-              new SimpleGrantedAuthority(
-                      user.getAuthority().name()
-              )
-      );
+      return user.getAuthority()
+              .stream()
+              .map(v -> new SimpleGrantedAuthority(v.name()))
+              .collect(Collectors.toList());
    }
 
    @Override

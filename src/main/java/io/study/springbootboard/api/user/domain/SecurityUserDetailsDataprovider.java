@@ -2,7 +2,7 @@ package io.study.springbootboard.api.user.domain;
 
 import io.study.springbootboard.api.user.domain.entity.User;
 import io.study.springbootboard.api.user.domain.repository.UserQueryRepository;
-import io.study.springbootboard.web.exception.types.UserNotMatchedException;
+import io.study.springbootboard.web.exception.types.user.UserNotMatchedException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
