@@ -21,8 +21,8 @@ public enum ApiStatusCode {
    USER_UNAUTHORIZED(2401, "User Unauthorized"),
    USER_LOGIN_NOT_MATCHED(2404, "User Email or Password Not Match"),
    USER_EMAIL_VALIDATION_FAILED(2410, "이메일 형식이 잘못되었습니다."),
-   USER_PASSWORD_VALIDATION_FAILED(2411, "비밀번호 형식이 잘못되었습니다.")
-
+   USER_PASSWORD_VALIDATION_FAILED(2411, "비밀번호 형식이 잘못되었습니다."),
+   USER_EMAIL_IS_EXIST(2412, "이미 존재하는 이메일입니다.")
    ;
 
    private int code;

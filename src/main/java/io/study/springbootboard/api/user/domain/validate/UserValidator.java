@@ -2,14 +2,14 @@ package io.study.springbootboard.api.user.domain.validate;
 
 import io.study.springbootboard.api.user.domain.entity.User;
 import io.study.springbootboard.api.user.domain.repository.UserQueryRepository;
+import io.study.springbootboard.web.exception.types.user.UserEmailIsExistException;
 import io.study.springbootboard.web.exception.types.user.UserEmailValidationException;
 import io.study.springbootboard.web.exception.types.user.UserNotMatchedException;
 import io.study.springbootboard.web.exception.types.user.UserPasswordValidationException;
+import java.util.regex.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.regex.Pattern;
 
 @Component
 @RequiredArgsConstructor
@@ -18,20 +18,20 @@ public class UserValidator {
    private final UserQueryRepository userQueryRepository;
    private final PasswordEncoder passwordEncoder;
    private static final Pattern emailPattern = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
-
    private static final Pattern passwordPattern = Pattern.compile("^[a-zA-Z0-9!@#$%^&*()-_+=]{8,16}$");
 
+   /*
+   * 1. 이메일 유효성 검사
+   * 2. email 중복 검사
+   * 3. 비밀번호 유효성 체크
+   * */
    public void validate(User user) {
 
-      // 1. 이메일 유효성 검사
-      emailPatternValidation(user.getEmail());
+      final String email = user.getEmail();
 
-      // 2. 이미 존재하는 회원인가.
-
-      // 3. 비밀번호 유효성  감사
+      emailPatternValidation(email);
+      emailDuplicatedValidation(email);
       passwordPatternValidation(user.getPassword());
-
-      System.out.println("통과");
    }
 
    public void loginValidate(User user, String plainPassword) {
@@ -45,6 +45,12 @@ public class UserValidator {
 
       if (!emailPattern.matcher(email).matches()) {
          throw new UserEmailValidationException();
+      }
+   }
+
+   private void emailDuplicatedValidation(String email) {
+      if(userQueryRepository.isExistEmail(email)){
+         throw new UserEmailIsExistException();
       }
    }
 
