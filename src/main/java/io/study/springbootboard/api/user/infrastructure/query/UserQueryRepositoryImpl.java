@@ -23,9 +23,7 @@ public class UserQueryRepositoryImpl implements UserQueryRepository {
 
       return Optional.ofNullable(
          queryFactory.selectFrom(user)
-            .where(
-               eqEmail(email)
-            )
+            .where(eqEmail(email))
             .fetchOne()
       );
    }

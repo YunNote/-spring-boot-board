@@ -8,6 +8,7 @@ import io.study.springbootboard.web.configuration.jwt.JwtSecurityConfig;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Slf4j
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true,
-        securedEnabled = true,
-        jsr250Enabled = true)
+   prePostEnabled = true,
+   securedEnabled = true,
+   jsr250Enabled = true)
 @RequiredArgsConstructor
-public class SecurityConfiguration{
+public class SecurityConfiguration {
 
    private final JwtProvider jwtProvider;
    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -36,22 +37,21 @@ public class SecurityConfiguration{
       log.info("[+] Spring Security Configuration! ");
 
       http
-              .httpBasic().disable()
-              .csrf().disable()
-              .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-              .and()
-              .exceptionHandling()
-              .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-              .accessDeniedHandler(jwtAccessDeniedHandler)
-              .and()
-              .authorizeHttpRequests()
-              .antMatchers("/api/test").permitAll()
-              .antMatchers("/api/users/**").permitAll()
-              .anyRequest().authenticated()
-              .and()
-              .formLogin().disable()
-              .addFilterBefore(new HeadersFilter(), UsernamePasswordAuthenticationFilter.class)
-              .apply(new JwtSecurityConfig(jwtProvider));
+         .httpBasic().disable()
+         .csrf().disable()
+         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+         .and()
+         .exceptionHandling()
+         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+         .accessDeniedHandler(jwtAccessDeniedHandler)
+         .and()
+         .authorizeHttpRequests()
+         .antMatchers(HttpMethod.POST, "/api/users", "/api/users/signin").permitAll()
+         .anyRequest().authenticated()
+         .and()
+         .formLogin().disable()
+         .addFilterBefore(new HeadersFilter(), UsernamePasswordAuthenticationFilter.class)
+         .apply(new JwtSecurityConfig(jwtProvider));
       return http.build();
    }
 
