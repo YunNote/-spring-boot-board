@@ -1,7 +1,9 @@
 package io.study.springbootboard.web.exception.types;
 
 import io.study.springbootboard.web.exception.ApiStatusCode;
+import lombok.Getter;
 
+@Getter
 public class BaseException extends RuntimeException{
 
    private int code;

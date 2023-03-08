@@ -52,10 +52,6 @@ public class User extends BaseEntity {
       return new User(email, encryptPassword);
    }
 
-   public void validator(UserValidator userValidator) {
-      userValidator.validate(this);
-   }
-
    public void loginValidate(UserValidator userValidator, String plainPassword) {
       userValidator.loginValidate(this, plainPassword);
    }

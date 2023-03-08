@@ -2,6 +2,7 @@ package io.study.springbootboard.api.user.domain.validate;
 
 import io.study.springbootboard.api.user.domain.entity.User;
 import io.study.springbootboard.api.user.domain.repository.UserQueryRepository;
+import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
 import io.study.springbootboard.web.exception.types.user.UserEmailIsExistException;
 import io.study.springbootboard.web.exception.types.user.UserEmailValidationException;
 import io.study.springbootboard.web.exception.types.user.UserNotMatchedException;
@@ -25,7 +26,7 @@ public class UserValidator {
    * 2. email 중복 검사
    * 3. 비밀번호 유효성 체크
    * */
-   public void validate(User user) {
+   public void validate(UserSignupWrapper user) {
 
       final String email = user.getEmail();
 

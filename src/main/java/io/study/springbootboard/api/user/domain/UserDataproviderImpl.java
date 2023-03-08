@@ -35,9 +35,8 @@ public class UserDataproviderImpl implements  UserDataprovider{
    @Override
    public void registed(UserSignupWrapper wrapper) {
 
+      wrapper.validator(userValidator);
       User user = userMapper.mapFrom(wrapper);
-      user.validator(userValidator);
-
       userRepository.save(user);
    }
 }

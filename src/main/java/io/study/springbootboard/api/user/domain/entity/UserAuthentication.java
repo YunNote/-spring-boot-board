@@ -1,6 +1,7 @@
 package io.study.springbootboard.api.user.domain.entity;
 
 import io.study.springbootboard.web.base.entity.BaseEntity;
+import io.study.springbootboard.web.base.types.AuthenticationStatusType;
 import io.study.springbootboard.web.base.types.AuthenticationType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,10 @@ public class UserAuthentication extends BaseEntity {
    @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Long id;
 
-   @Enumerated
+   @Enumerated(EnumType.STRING)
    private AuthenticationType type;
+
+   @Enumerated(EnumType.STRING)
+   private AuthenticationStatusType authenticationStatus;
 
 }

@@ -2,7 +2,7 @@ package io.study.springbootboard.api.user.domain.validate;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-import io.study.springbootboard.api.user.domain.entity.User;
+import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
 import io.study.springbootboard.web.exception.types.user.UserEmailValidationException;
 import io.study.springbootboard.web.exception.types.user.UserPasswordValidationException;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +16,7 @@ public class UserValidatorTest {
    @Test
    @DisplayName(value = "[User] 이메일 검증 성공 테스트")
    public void userEmailValidationSuccess() {
-      User user = User.generatedBasicUser("zzdd1558@gmail.com", "1234");
+      UserSignupWrapper user = new UserSignupWrapper("zzdd1558@gmail.com", "1234");
 
       assertThatThrownBy(() -> userValidator.validate(user))
          .isInstanceOf(UserPasswordValidationException.class);
@@ -25,7 +25,7 @@ public class UserValidatorTest {
    @Test
    @DisplayName(value = "[User] 존재하는 이메일 Test")
    public void userEmailIsExist() {
-      User user = User.generatedBasicUser("zzdd1558@gmail.com", "1234");
+      UserSignupWrapper user = new UserSignupWrapper("zzdd1558@gmail.com", "1234");
 
       assertThatThrownBy(() -> userValidator.validate(user))
          .isInstanceOf(UserPasswordValidationException.class);
@@ -34,7 +34,7 @@ public class UserValidatorTest {
    @Test
    @DisplayName(value = "[User] 이메일 검증 Exception ")
    public void userEmailValidationFail(){
-      User user = User.generatedBasicUser("zzdd1@558@gmail.com", "1234");
+      UserSignupWrapper user = new UserSignupWrapper("zzdd1@558@gmail.com", "1234");
       assertThatThrownBy(() -> userValidator.validate(user))
               .isInstanceOf(UserEmailValidationException.class);
    }
