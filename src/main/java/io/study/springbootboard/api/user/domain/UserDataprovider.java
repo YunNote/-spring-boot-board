@@ -9,4 +9,6 @@ public interface UserDataprovider {
 
    User loginBasicUser(UserSigninWrapper wrapper);
    void registed(UserSignupWrapper wrapper);
+
+   void resetPassword(String email);
 }

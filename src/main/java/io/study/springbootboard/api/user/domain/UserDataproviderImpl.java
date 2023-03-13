@@ -9,6 +9,7 @@ import io.study.springbootboard.api.user.domain.wrapper.UserSigninWrapper;
 import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
 import io.study.springbootboard.web.event.mail.SignupEvent;
 import io.study.springbootboard.web.exception.types.user.UserNotMatchedException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -30,9 +31,7 @@ public class UserDataproviderImpl implements UserDataprovider {
    @Override
    public User loginBasicUser(UserSigninWrapper wrapper) {
 
-      User user = userQueryRepository.findUsername(wrapper.getEmail())
-         .orElseThrow(() -> new UserNotMatchedException());
-
+      User user = availableUser(userQueryRepository.findUsername(wrapper.getEmail()));
       user.loginValidate(userValidator, wrapper.getPassword());
 
       return user;
@@ -45,5 +44,18 @@ public class UserDataproviderImpl implements UserDataprovider {
       User user = userMapper.mapFrom(wrapper);
       userRepository.save(user);
       applicationEventPublisher.publishEvent(SignupEvent.of(user.getEmail()));
+   }
+
+   @Override
+   public void resetPassword(String email) {
+      User user = availableUser(userQueryRepository.findUsername(email));
+      userMapper.resetPassword(user);
+
+      applicationEventPublisher.publishEvent();
+   }
+
+   private User availableUser(Optional<User> user) {
+
+      return user.orElseThrow(() -> new UserNotMatchedException());
    }
 }

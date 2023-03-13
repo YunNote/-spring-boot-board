@@ -15,7 +15,9 @@ public class UserMapper {
    public User mapFrom(UserSignupWrapper wrapper) {
 
       String encryptPassword = passwordEncoder.encode(wrapper.getPassword());
-
       return User.generatedBasicUser(wrapper.getEmail(), encryptPassword);
+   }
+
+   public void resetPassword(User user) {
    }
 }
