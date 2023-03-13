@@ -16,20 +16,16 @@ public class MailService {
 
    private final JavaMailSender javaMailSender;
 
-   public void sendMail() throws MessagingException, UnsupportedEncodingException {
+   public void sendMail(String[] to, String title, String content)
+      throws MessagingException, UnsupportedEncodingException {
 
       MimeMessage message = javaMailSender.createMimeMessage();
 
       MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-      String[] receivers = {"zzdd1558@naver.com"};
-
-      messageHelper.setTo(receivers);
-      messageHelper.setSubject(" 테스트 이메일 제목 ");
-      messageHelper.setFrom(new InternetAddress("noreply.petnote@gmail.com", "hello", "UTF-8"));
-
-      String content = "테스트 <br> <b>테스트</b>";
-
+      messageHelper.setTo(to);
+      messageHelper.setSubject(title);
+      messageHelper.setFrom(new InternetAddress("noreply.yunnote@gmail.com", "yunnote", "UTF-8"));
       messageHelper.setText(content, true);
 
       javaMailSender.send(message);

@@ -30,6 +30,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
+    open-in-view: false
 
   config:
     import: application-mail.yml

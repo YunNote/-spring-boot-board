@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class UserSigninUsecase {
    private final AuthenticationManagerBuilder authenticationManagerBuilder;
    private final JwtProvider jwtProvider;
 
+   @Transactional
    public Jwt login(UserSigninWrapper wrapper) {
 
       UsernamePasswordAuthenticationToken authenticationToken =  new UsernamePasswordAuthenticationToken(wrapper.getEmail(), wrapper.getPassword());

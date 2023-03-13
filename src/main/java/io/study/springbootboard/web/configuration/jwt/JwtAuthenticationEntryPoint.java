@@ -1,21 +1,25 @@
 package io.study.springbootboard.web.configuration.jwt;
 
+import static io.study.springbootboard.web.exception.ApiStatusCode.EXPIRED_JWT_TOKEN;
+import static io.study.springbootboard.web.exception.ApiStatusCode.INVALID_JWT_SIGNATURE;
+import static io.study.springbootboard.web.exception.ApiStatusCode.INVALID_JWT_TOKEN;
+import static io.study.springbootboard.web.exception.ApiStatusCode.JWT_UNKNOWN_ERROR;
+import static io.study.springbootboard.web.exception.ApiStatusCode.UNSUPPORTED_JWT_TOKEN;
+import static io.study.springbootboard.web.exception.ApiStatusCode.USER_LOGIN_NOT_MATCHED;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.study.springbootboard.web.base.response.BaseResponse;
 import io.study.springbootboard.web.exception.ApiStatusCode;
+import java.io.IOException;
+import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Objects;
-
-import static io.study.springbootboard.web.exception.ApiStatusCode.*;
 
 @Slf4j
 @Component
@@ -25,7 +29,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
    private final ObjectMapper objectMapper = new ObjectMapper();
 
    @Override
-   public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException {
+   public void commence(HttpServletRequest request, HttpServletResponse response,
+      AuthenticationException authException) throws IOException {
 
       ApiStatusCode status = (ApiStatusCode) request.getAttribute(ATTRIBUTE);
 
@@ -64,17 +69,18 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
       }
    }
 
-   private void responseBuilder(HttpServletResponse response, ApiStatusCode statusCode) throws IOException {
+   private void responseBuilder(HttpServletResponse response, ApiStatusCode statusCode)
+      throws IOException {
 
       response.setContentType(MediaType.APPLICATION_JSON_VALUE);
       response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
       response.getWriter().print(
-              objectMapper.writeValueAsString(
-                      new BaseResponse(
-                              statusCode.getCode(),
-                              statusCode.getDescription()
-                      )
-              )
+         objectMapper.writeValueAsString(
+            new BaseResponse(
+               statusCode.getCode(),
+               statusCode.getDescription()
+            )
+         )
       );
    }
 }

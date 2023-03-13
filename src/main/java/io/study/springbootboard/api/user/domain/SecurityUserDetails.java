@@ -20,9 +20,9 @@ public class SecurityUserDetails implements UserDetails {
    public Collection<? extends GrantedAuthority> getAuthorities() {
 
       return user.getAuthority()
-              .stream()
-              .map(v -> new SimpleGrantedAuthority(v.name()))
-              .collect(Collectors.toList());
+         .stream()
+         .map(v -> new SimpleGrantedAuthority(v.name()))
+         .collect(Collectors.toList());
    }
 
    @Override
