@@ -30,11 +30,11 @@ public class User extends BaseEntity {
 
    @ElementCollection
    @CollectionTable(
-           name = "user_authorities",
-           joinColumns = @JoinColumn(name = "id")
+      name = "user_authorities",
+      joinColumns = @JoinColumn(name = "id")
    )
    @Enumerated(EnumType.STRING)
-   private Set<AuthorityType> authority = new HashSet<>(Arrays.asList(AuthorityType.ROLE_USER)) ;
+   private Set<AuthorityType> authority = new HashSet<>(Arrays.asList(AuthorityType.ROLE_USER));
 
    @Enumerated(EnumType.STRING)
    private UserStatusType userStatus = UserStatusType.ACTIVE;
@@ -54,5 +54,9 @@ public class User extends BaseEntity {
 
    public void loginValidate(UserValidator userValidator, String plainPassword) {
       userValidator.loginValidate(this, plainPassword);
+   }
+
+   public void resetPassword(String encryptPassword) {
+      this.password = encryptPassword;
    }
 }

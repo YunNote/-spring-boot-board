@@ -7,12 +7,10 @@ import io.study.springbootboard.api.user.domain.repository.UserRepository;
 import io.study.springbootboard.api.user.domain.validate.UserValidator;
 import io.study.springbootboard.api.user.domain.wrapper.UserSigninWrapper;
 import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
-import io.study.springbootboard.web.event.mail.SignupEvent;
 import io.study.springbootboard.web.exception.types.user.UserNotMatchedException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -25,9 +23,6 @@ public class UserDataproviderImpl implements UserDataprovider {
    private final UserMapper userMapper;
    private final UserValidator userValidator;
 
-   private final ApplicationEventPublisher applicationEventPublisher;
-
-
    @Override
    public User loginBasicUser(UserSigninWrapper wrapper) {
 
@@ -38,20 +33,19 @@ public class UserDataproviderImpl implements UserDataprovider {
    }
 
    @Override
-   public void registed(UserSignupWrapper wrapper) {
+   public String registed(UserSignupWrapper wrapper) {
 
       wrapper.validator(userValidator);
       User user = userMapper.mapFrom(wrapper);
       userRepository.save(user);
-      applicationEventPublisher.publishEvent(SignupEvent.of(user.getEmail()));
+
+      return user.getEmail();
    }
 
    @Override
-   public void resetPassword(String email) {
+   public void resetPassword(String email, String plainPassword) {
       User user = availableUser(userQueryRepository.findUsername(email));
-      userMapper.resetPassword(user);
-
-      applicationEventPublisher.publishEvent();
+      userMapper.resetPassword(user, plainPassword);
    }
 
    private User availableUser(Optional<User> user) {

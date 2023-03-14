@@ -46,7 +46,7 @@ public class SecurityConfiguration {
          .accessDeniedHandler(jwtAccessDeniedHandler)
          .and()
          .authorizeHttpRequests()
-         .antMatchers(HttpMethod.POST, "/api/users", "/api/users/signin").permitAll()
+         .antMatchers(HttpMethod.POST, "/api/users", "/api/users/signin", "/api/users/reset-password").permitAll()
          .anyRequest().authenticated()
          .and()
          .formLogin().disable()

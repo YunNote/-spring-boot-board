@@ -8,7 +8,7 @@ import io.study.springbootboard.api.user.domain.wrapper.UserSignupWrapper;
 public interface UserDataprovider {
 
    User loginBasicUser(UserSigninWrapper wrapper);
-   void registed(UserSignupWrapper wrapper);
+   String registed(UserSignupWrapper wrapper);
 
-   void resetPassword(String email);
+   void resetPassword(String email, String plainPassword);
 }

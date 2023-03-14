@@ -1,4 +1,4 @@
-package io.study.springbootboard.web.event.mail;
+package io.study.springbootboard.api.user.domain.event;
 
 import lombok.Getter;
 
